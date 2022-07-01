@@ -64,10 +64,9 @@ def extract_text_xml(path,file):
 
 def keybert_extractor(lang):
     """
-    extract abstract text from xml file
-    Arguments: path (str)
-    Arguments: file (str)
-    Returns: extracted text (str)
+    initialize bert model and vectorizer
+    Arguments: lang (str)
+    Returns: keybert model and vectorizer
     """
     if lang != 'en':
         vectorizer = KeyphraseCountVectorizer(spacy_pipeline='de_core_news_sm', pos_pattern='<ADJ.*>*<N.*>+',
