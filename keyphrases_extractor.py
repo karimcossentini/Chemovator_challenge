@@ -5,7 +5,11 @@ from bs4 import BeautifulSoup
 import re
 import os
 import nltk
+from googletrans import Translator
+
 nltk.download('words')
+words = set(nltk.corpus.words.words())
+
 
 def scored_keyphrases_extractor(keyphrases):
     """
@@ -21,7 +25,6 @@ def scored_keyphrases_extractor(keyphrases):
     return results
 
 
-words = set(nltk.corpus.words.words())
 
 
 def remove_meaningful_words(text):
@@ -33,21 +36,40 @@ def remove_meaningful_words(text):
     return " ".join(w for w in nltk.wordpunct_tokenize(text) if w.lower() in words or not w.isalpha())
 
 def clean_text(text):
-
+    """
+    clean text
+    Arguments: text (str)
+    Returns: cleaned text (str)
+    """
     text = ' '.join(text)
     text = re.sub('\n+', ' ', str(text))
     text = re.sub(' +', ' ', str(text))
     return text
 
 def extract_text_xml(path,file):
+    """
+    extract abstract text from xml file
+    Arguments: path (str)
+    Arguments: file (str)
+    Returns: extracted text (str)
+    """
+    pageText=[]
     with open(os.path.join(path, file), 'r', encoding='utf-8') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="xml")
-    pageText = soup.findAll(text=True)
+    #pageText = soup.findAll(text=True)
+    for line in soup.find_all('abstract'):
+        pageText.append(line.text)
     return pageText
 
-def keybert_extractor(file_tag):
-    if file_tag == 'AT':
+def keybert_extractor(lang):
+    """
+    extract abstract text from xml file
+    Arguments: path (str)
+    Arguments: file (str)
+    Returns: extracted text (str)
+    """
+    if lang != 'en':
         vectorizer = KeyphraseCountVectorizer(spacy_pipeline='de_core_news_sm', pos_pattern='<ADJ.*>*<N.*>+',
                                               stop_words='german')
         bert = KeyBERT(model=TransformerDocumentEmbeddings('dbmdz/bert-base-german-uncased'))
@@ -56,3 +78,12 @@ def keybert_extractor(file_tag):
         bert = KeyBERT()
     return bert, None
 
+
+def detect_lang(text):
+    """
+    detect the language of text data
+    Arguments: text (str)
+    Returns: detected language (str)
+    """
+    translator = Translator()
+    return translator.detect(str(text)).lang
