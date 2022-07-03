@@ -2,7 +2,7 @@
 
 ### Solution
 #### Requirements
-* Run requirements.txt file to install the required packages.
+* Run pip install -r requirements.txt to install the required packages.
 #### Files
 * **database.py :** Creates postgres database.
 * **models.py :** Contains the DocInfo class that has two attributes (file_name: primary key , keyphrases) and which will be mapped to a table on the database.
