@@ -11,7 +11,8 @@
 * **main.py :** Execution file (extracting keyphrases from xml file and filling the newly created table with the entries that were provided from extraction).
 * **patent_doc_database.log :** Contains status messages or any other output streams.
 #### Usage
-This solution can be executed via main.py.
+* create a folder named "data" and paste all data folders containing the xml files into it.
+* This solution can be executed via main.py.
 #### Algorithms
 ###### 1- Keyphrases extraction
 As shown in the figures 1 and 2, These are the results of a recent benchmark that measured 
