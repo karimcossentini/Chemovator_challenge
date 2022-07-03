@@ -17,13 +17,13 @@ This solution can be executed via main.py.
 As shown in the figures 1 and 2, These are the results of a recent benchmark that measured 
 the performance of several keywords extraction models using a dataset of 2000 samples.
 
-![alt text](../../models_time.png)
+![alt text](readme_images/models_time.png)
 <figcaption align = "center"><b>Fig.1 - Elapsed time in seconds</b></figcaption>
 
 According to the time elapsed in seconds in figure 1, Rake outperforms all other algorithms 
 by a significant margin. Rake processes 2000 documents in only two seconds, which is impressive.
 
-![alt text](../../models_acc.png)
+![alt text](readme_images/models_acc.png)
 <figcaption align = "center"><b>Fig.2 - Accuracy results</b></figcaption>
 
 The results in the figure 2 are as follows if we were to simply take accuracy into account, which is calculated 
@@ -43,4 +43,4 @@ In order to store the results (extracted keyphrases per document), I decided to 
 **Postgres (an object-relational database)** which is one of the most advanced open source relational database systems
 along with **SQLAlchemy** library that facilitates the communication between Python programs and databases and which is used as an Object Relational Mapper (ORM) also that translates Python classes to tables statements.
 
-![alt text](../../original.jpg)
+![alt text](readme_images/original.jpg)
