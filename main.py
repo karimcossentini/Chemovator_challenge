@@ -25,8 +25,6 @@ for folders in os.listdir('data'):
             # Extract text (abstract) from xml files
             pageText = extract_text_xml(path, file)
 
-            print(file)
-
             if pageText:
                 # Detect text language to determine which BERT model to use
                 language = detect_lang(' '.join(pageText))
