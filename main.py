@@ -3,9 +3,8 @@ import re
 from keyphrases_extractor import keybert_extractor, clean_text, scored_keyphrases_extractor, remove_meaningful_words, \
     extract_text_xml, detect_lang
 import models
-from database import engine,SessionLocal
+from database import engine, SessionLocal
 import logging
-
 
 # implement an event logging system
 logging.basicConfig(filename='patent_doc_database.log', filemode='w',
@@ -44,7 +43,8 @@ for folders in os.listdir('data'):
                     pageText = re.sub(r'\w*\d\w*', '', str(pageText))
                     pageText = remove_meaningful_words(pageText)
                     # extract keyphrases
-                    keywords = bert.extract_keywords(pageText, keyphrase_ngram_range=(1, 3), stop_words="english", top_n=5)
+                    keywords = bert.extract_keywords(pageText, keyphrase_ngram_range=(1, 3), stop_words="english",
+                                                     top_n=5)
                     keywords = scored_keyphrases_extractor(keywords)
             else:
                 keywords = 'abstract not found'
@@ -55,5 +55,3 @@ for folders in os.listdir('data'):
             db.commit()
             db.refresh(doc)
             logger.info('data inserted successfully %s: ', file)
-
-

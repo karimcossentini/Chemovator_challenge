@@ -25,8 +25,6 @@ def scored_keyphrases_extractor(keyphrases):
     return results
 
 
-
-
 def remove_meaningful_words(text):
     """
     filter out meaningful words from the text
@@ -34,6 +32,7 @@ def remove_meaningful_words(text):
     Returns: clean text (str)
     """
     return " ".join(w for w in nltk.wordpunct_tokenize(text) if w.lower() in words or not w.isalpha())
+
 
 def clean_text(text):
     """
@@ -46,21 +45,23 @@ def clean_text(text):
     text = re.sub(' +', ' ', str(text))
     return text
 
-def extract_text_xml(path,file):
+
+def extract_text_xml(path, file):
     """
     extract abstract text from xml file
     Arguments: path (str)
     Arguments: file (str)
     Returns: extracted text (str)
     """
-    pageText=[]
+    pageText = []
     with open(os.path.join(path, file), 'r', encoding='utf-8') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="xml")
-    #pageText = soup.findAll(text=True)
+    # pageText = soup.findAll(text=True)
     for line in soup.find_all('abstract'):
         pageText.append(line.text)
     return pageText
+
 
 def keybert_extractor(lang):
     """
